@@ -21,8 +21,8 @@ export class LambdaStack extends Stack {
 
         const passwordsLambda = new NodejsFunction(this, 'PasswordsLambda', {
             runtime: Runtime.NODEJS_18_X,
-            handler: 'handler',
-            entry: (join(__dirname, '..', '..' ,'services', 'tools','handler.ts')),
+            handler: 'passwordHandler',
+            entry: (join(__dirname, '..', '..' ,'services', 'passwordsHandlers','passwordHandler.ts')),
             environment: {
                 TABLE_NAME: props.passwordsTable.tableName
             }
