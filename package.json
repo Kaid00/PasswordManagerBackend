@@ -1,0 +1,32 @@
+{
+  "name": "passwordmanager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.114",
+    "@types/node": "^18.15.10",
+    "aws-cdk": "2.79.1",
+    "aws-cdk-lib": "2.79.1",
+    "constructs": "^10.2.24",
+    "esbuild": "^0.17.14",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.2"
+  },
+  "dependencies": {
+    "@aws-amplify/auth": "^5.2.3",
+    "@aws-sdk/client-dynamodb": "^3.303.0",
+    "@aws-sdk/client-s3": "^3.462.0",
+    "@aws-sdk/lib-dynamodb": "^3.306.0",
+    "@aws-sdk/util-dynamodb": "^3.306.0",
+    "aws-amplify": "^5.0.25",
+    "@aws-sdk/client-cognito-identity": "^3.310.0",
+    "@aws-sdk/credential-providers": "^3.310.0"
+  }
+}
