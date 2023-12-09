@@ -27,9 +27,9 @@ export class ApiStack extends Stack {
         // Then create an explicit Deployment construct
         const deployment  = new Deployment(this, 'passwordManagerDeployment', { api });
 
-        // And different stages
-        const [devStage, testStage, prodStage] = ['dev', 'test', 'prod'].map(item => 
-        new Stage(this, `${item}_stage`, { deployment, stageName: item }));
+        // // And different stages
+        // const [devStage, testStage, prodStage] = ['dev', 'test', 'prod'].map(item => 
+        // new Stage(this, `${item}_stage`, { deployment, stageName: item }));
         
         // if( props.stageName == 'test') {
         //     api.deploymentStage = testStage
@@ -41,7 +41,7 @@ export class ApiStack extends Stack {
         //     api.deploymentStage = devStage
 
         // }
-        api.deploymentStage = testStage
+        // api.deploymentStage = testStage
 
 
 
