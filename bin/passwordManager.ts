@@ -27,3 +27,4 @@ new CiCdStack(app, 'PasswordManagerPipeline', {
 
 // new MonitorStack(app, 'PasswordManagerMonitorStack');
 
+app.synth();
