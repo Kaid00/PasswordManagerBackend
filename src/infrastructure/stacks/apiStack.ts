@@ -24,7 +24,13 @@ export class ApiStack extends Stack {
         authorizer._attachToApi(api);
         
         // Then create an explicit Deployment construct
-        // const deployment  = new Deployment(this, 'passwordManagerDeployment', { api });
+        const deployment  = new Deployment(this, 'passwordManagerDeploymentCi', { api });
+
+        new Stage(this, 'dev', {
+            deployment,
+            stageName: 'dev'
+        })
+
 
         // // And different stages
         // const [devStage, testStage, prodStage] = ['dev', 'test', 'prod'].map(item => 
