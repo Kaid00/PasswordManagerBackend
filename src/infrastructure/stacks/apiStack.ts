@@ -31,16 +31,18 @@ export class ApiStack extends Stack {
         const [devStage, testStage, prodStage] = ['dev', 'test', 'prod'].map(item => 
         new Stage(this, `${item}_stage`, { deployment, stageName: item }));
         
-        if( props.stageName == 'test') {
-            api.deploymentStage = testStage
+        // if( props.stageName == 'test') {
+        //     api.deploymentStage = testStage
 
-        } else if (props.stageName == 'prod') {
-            api.deploymentStage = prodStage
+        // } else if (props.stageName == 'prod') {
+        //     api.deploymentStage = prodStage
 
-        } else {
-            api.deploymentStage = devStage
+        // } else {
+        //     api.deploymentStage = devStage
 
-        }
+        // }
+        api.deploymentStage = testStage
+
 
 
 
