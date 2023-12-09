@@ -6,6 +6,7 @@ import { IUserPool } from 'aws-cdk-lib/aws-cognito';
 interface ApiStackProps extends StackProps {
     passwordLambdaIntegration: LambdaIntegration,
     userPool: IUserPool;
+    stageName?: string
 
 }
 
@@ -26,27 +27,24 @@ export class ApiStack extends Stack {
         // Then create an explicit Deployment construct
         const deployment  = new Deployment(this, 'passwordManagerDeploymentCi', { api });
 
-        new Stage(this, 'dev', {
-            deployment,
-            stageName: 'dev'
-        })
-
+       
 
         // // And different stages
         // const [devStage, testStage, prodStage] = ['dev', 'test', 'prod'].map(item => 
         // new Stage(this, `${item}_stage`, { deployment, stageName: item }));
         
-        // if( props.stageName == 'test') {
-        //     api.deploymentStage = testStage
-
-        // } else if (props.stageName == 'prod') {
-        //     api.deploymentStage = prodStage
-
-        // } else {
-        //     api.deploymentStage = devStage
-
-        // }
-        // api.deploymentStage = testStage
+        if( props.stageName == 'test') {
+            new Stage(this, 'test', {
+                deployment,
+                stageName: 'test'
+            })
+    
+        } else if (props.stageName == 'prod') {
+            new Stage(this, 'prod', {
+                deployment,
+                stageName: 'prod'
+            })
+        } 
 
 
 
