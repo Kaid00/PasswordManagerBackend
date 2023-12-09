@@ -1,11 +1,13 @@
 import { Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { AuthorizationType, CognitoUserPoolsAuthorizer, Cors, LambdaIntegration, MethodOptions, ResourceOptions, RestApi } from 'aws-cdk-lib/aws-apigateway';
+import { AuthorizationType, CognitoUserPoolsAuthorizer, Cors, Deployment, LambdaIntegration, MethodOptions, ResourceOptions, RestApi, Stage } from 'aws-cdk-lib/aws-apigateway';
 import { IUserPool } from 'aws-cdk-lib/aws-cognito';
 
 interface ApiStackProps extends StackProps {
     passwordLambdaIntegration: LambdaIntegration,
     userPool: IUserPool;
+    stageName?: string
+
 }
 
 export class ApiStack extends Stack {
@@ -21,6 +23,26 @@ export class ApiStack extends Stack {
             identitySource: 'method.request.header.Authorization'
         });
         authorizer._attachToApi(api);
+        
+        // Then create an explicit Deployment construct
+        const deployment  = new Deployment(this, 'passwordManagerDeployment', { api });
+
+        // And different stages
+        const [devStage, testStage, prodStage] = ['dev', 'test', 'prod'].map(item => 
+        new Stage(this, `${item}_stage`, { deployment, stageName: item }));
+        
+        if( props.stageName == 'test') {
+            api.deploymentStage = testStage
+
+        } else if (props.stageName == 'prod') {
+            api.deploymentStage = prodStage
+
+        } else {
+            api.deploymentStage = devStage
+
+        }
+
+
 
         const optionsWithAuth: MethodOptions = {
             authorizationType: AuthorizationType.COGNITO,

@@ -9,7 +9,8 @@ import { join } from "path";
 
 
 interface LambdaStackProps extends StackProps {
-    passwordsTable: ITable
+    passwordsTable: ITable,
+    stageName?: string
 }
 
 export class LambdaStack extends Stack {
@@ -24,7 +25,8 @@ export class LambdaStack extends Stack {
             handler: 'passwordHandler',
             entry: (join(__dirname, '..', '..' ,'services', 'passwordsHandlers','passwordHandler.ts')),
             environment: {
-                TABLE_NAME: props.passwordsTable.tableName
+                TABLE_NAME: props.passwordsTable.tableName,
+                STAGE: props.stageName
             }
         })
    

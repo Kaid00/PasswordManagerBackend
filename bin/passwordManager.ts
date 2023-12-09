@@ -12,18 +12,18 @@ const app = new App();
 new CiCdStack(app, 'PasswordManagerPipeline', {
 });
 
-const dataStack = new DataStack(app, 'PasswordManagerDataStack')
+// const dataStack = new DataStack(app, 'PasswordManagerDataStack')
 
-const lambdaStack = new LambdaStack(app, 'PasswordManagerLambdaStack', {
-    passwordsTable: dataStack.passwordTable
-})
+// const lambdaStack = new LambdaStack(app, 'PasswordManagerLambdaStack', {
+//     passwordsTable: dataStack.passwordTable
+// })
 
-const authStack = new AuthStack(app, 'PasswordManagerAuthStack')
+// const authStack = new AuthStack(app, 'PasswordManagerAuthStack')
 
-new ApiStack(app, 'PasswordManagerApiStack', {
-    passwordLambdaIntegration: lambdaStack.passwordLambdaIntegration,
-    userPool: authStack.userPool
-})
+// new ApiStack(app, 'PasswordManagerApiStack', {
+//     passwordLambdaIntegration: lambdaStack.passwordLambdaIntegration,
+//     userPool: authStack.userPool
+// })
 
-new MonitorStack(app, 'PasswordManagerMonitorStack');
+// new MonitorStack(app, 'PasswordManagerMonitorStack');
 
