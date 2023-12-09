@@ -20,11 +20,10 @@ export class PipelineStage extends Stage {
         
         const authStack = new AuthStack(this, 'PasswordManagerAuthStack')
         
-        // new ApiStack(this, 'PasswordManagerApiStack2', {
-        //     passwordLambdaIntegration: lambdaStack.passwordLambdaIntegration,
-        //     userPool: authStack.userPool,
-        //     stageName: props.stageName
-        // })
+        new ApiStack(this, 'PasswordManagerApiStack2', {
+            passwordLambdaIntegration: lambdaStack.passwordLambdaIntegration,
+            userPool: authStack.userPool
+        })
        
     }
 }

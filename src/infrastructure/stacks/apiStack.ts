@@ -6,7 +6,6 @@ import { IUserPool } from 'aws-cdk-lib/aws-cognito';
 interface ApiStackProps extends StackProps {
     passwordLambdaIntegration: LambdaIntegration,
     userPool: IUserPool;
-    stageName?: string
 
 }
 
@@ -15,10 +14,10 @@ export class ApiStack extends Stack {
     constructor(scope: Construct, id: string, props?: ApiStackProps) {
         super(scope, id, props);
 
-        const api = new RestApi(this, 'PasswordManagerApi2');
+        const api = new RestApi(this, 'PasswordManagerApiCi');
 
         // Configuring authorizer with Cognito User Pool
-        const authorizer = new CognitoUserPoolsAuthorizer(this, 'PasswordManagerApiAuthorizer2', {
+        const authorizer = new CognitoUserPoolsAuthorizer(this, 'PasswordManagerApiAuthorizerCi', {
             cognitoUserPools: [props.userPool],
             identitySource: 'method.request.header.Authorization'
         });
