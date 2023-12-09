@@ -28,23 +28,26 @@ export class ApiStack extends Stack {
         const deployment  = new Deployment(this, 'passwordManagerDeploymentCi', { api });
 
        
-
+        new Stage(this, props.stageName, {
+            deployment,
+            stageName: props.stageName
+        })
         // // And different stages
         // const [devStage, testStage, prodStage] = ['dev', 'test', 'prod'].map(item => 
         // new Stage(this, `${item}_stage`, { deployment, stageName: item }));
         
-        if( props.stageName == 'test') {
-            new Stage(this, 'test', {
-                deployment,
-                stageName: 'test'
-            })
+        // if( props.stageName === 'test') {
+        //     new Stage(this, 'test', {
+        //         deployment,
+        //         stageName: 'test'
+        //     })
     
-        } else if (props.stageName == 'prod') {
-            new Stage(this, 'prod', {
-                deployment,
-                stageName: 'prod'
-            })
-        } 
+        // } else if (props.stageName === 'prod') {
+        //     new Stage(this, 'prod', {
+        //         deployment,
+        //         stageName: 'prod'
+        //     })
+        // } 
 
 
 
