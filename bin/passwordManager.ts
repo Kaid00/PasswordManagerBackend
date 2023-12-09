@@ -4,9 +4,13 @@ import { LambdaStack } from "../src/infrastructure/stacks/lambdaStack";
 import { AuthStack } from "../src/infrastructure/stacks/authStack";
 import { ApiStack } from "../src/infrastructure/stacks/apiStack";
 import { MonitorStack } from "../src/infrastructure/stacks/monitorStack";
+import { CiCdStack } from "../src/infrastructure/stacks/cicdStack";
 
 
 const app = new App();
+
+new CiCdStack(app, 'PasswordManagerPipeline', {
+});
 
 const dataStack = new DataStack(app, 'PasswordManagerDataStack')
 
@@ -22,3 +26,4 @@ new ApiStack(app, 'PasswordManagerApiStack', {
 })
 
 new MonitorStack(app, 'PasswordManagerMonitorStack');
+
