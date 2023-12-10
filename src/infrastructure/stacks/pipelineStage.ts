@@ -4,6 +4,7 @@ import { DataStack } from "./dataStack";
 import { LambdaStack } from "./lambdaStack";
 import { AuthStack } from "./authStack";
 import { ApiStack } from "./apiStack";
+import { MonitorStack } from "./monitorStack";
 
 
 export class PipelineStage extends Stage {
@@ -25,6 +26,9 @@ export class PipelineStage extends Stage {
             userPool: authStack.userPool,
             stageName: props.stageName
         })
-       
+
+        new MonitorStack(this, 'PasswordManagerMonitorStackCi');
+
+
     }
 }
