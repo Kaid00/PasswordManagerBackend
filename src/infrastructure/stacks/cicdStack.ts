@@ -22,18 +22,20 @@ export class CiCdStack extends cdk.Stack {
       stageName: 'test'
     }));
 
+    testingStage.addPre(new CodeBuildStep('jest-tests', {
+        commands: [
+          'npm ci',
+          'npm test'
+        ]
+      }))
+    
     testingStage.addPost(new ManualApprovalStep('Manual approval before production'))
 
     const productionStage = pipeline.addStage(new PipelineStage(this, 'PipelineProductionStage', {
         stageName: 'prod'
       }));
 
-    // testStage.addPre(new CodeBuildStep('unit-tests', {
-    //   commands: [
-    //     'npm ci',
-    //     'npm test'
-    //   ]
-    // }))
+ 
 
   }
 }
