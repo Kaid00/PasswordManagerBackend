@@ -1,10 +1,10 @@
 import { Stage, StageProps } from "aws-cdk-lib";
 import { Construct } from "constructs";
-import { DataStack } from "./dataStack";
-import { LambdaStack } from "./lambdaStack";
-import { AuthStack } from "./authStack";
-import { ApiStack } from "./apiStack";
-import { MonitorStack } from "./monitorStack";
+import { DataStack } from "../stacks/dataStack";
+import { LambdaStack } from "../stacks/lambdaStack";
+import { AuthStack } from "../stacks/authStack";
+import { ApiStack } from "../stacks/apiStack";
+import { MonitorStack } from "../stacks/monitorStack";
 
 
 export class PipelineStage extends Stage {
@@ -27,9 +27,9 @@ export class PipelineStage extends Stage {
             stageName: props.stageName
         })
 
-        new MonitorStack(this, 'PasswordManagerMonitorStackCi', {
-            stageName: props.stageName
-        });
+        // new MonitorStack(this, 'PasswordManagerMonitorStackCi', {
+        //     stageName: props.stageName
+        // });
 
 
     }
