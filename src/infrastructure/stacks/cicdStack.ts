@@ -25,7 +25,7 @@ export class CiCdStack extends cdk.Stack {
     testingStage.addPre(new CodeBuildStep('jest-tests', {
         commands: [
           'npm ci',
-          'npm test'
+          'npm test-infrastructure'
         ]
     }));
     
