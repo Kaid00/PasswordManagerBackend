@@ -1,18 +1,1 @@
-{
-  "PasswordManagerAuthStack": {
-    "ExportsOutputFnGetAttPasswordManagerUserPool049E24CEArnA9A345B4": "arn:aws:cognito-idp:us-east-1:097588108316:userpool/us-east-1_eQRQ8coKh",
-    "PasswordManagerUserPoolClientId": "6f2dkbg7bvr55q0dco4oke3ef9",
-    "PasswordManagerIdentityPoolId": "us-east-1:ee9012e2-9f9a-4fc6-8f3b-975b79528902",
-    "PasswordManagerUserPoolId": "us-east-1_eQRQ8coKh"
-  },
-  "PasswordManagerDataStack": {
-    "ExportsOutputRefPasswordsTable4A3A90244972B0F9": "PasswordsTable-0e592ee21a0d",
-    "ExportsOutputFnGetAttPasswordsTable4A3A9024Arn5C0C0EE9": "arn:aws:dynamodb:us-east-1:097588108316:table/PasswordsTable-0e592ee21a0d"
-  },
-  "PasswordManagerLambdaStack": {
-    "ExportsOutputFnGetAttPasswordsLambdaF966346BArn6E27971D": "arn:aws:lambda:us-east-1:097588108316:function:PasswordManagerLambdaStack-PasswordsLambdaF966346B-CaT714ebOKzp"
-  },
-  "PasswordManagerApiStack": {
-    "PasswordManagerApiEndpointF566F900": "https://ui7oh8kbwf.execute-api.us-east-1.amazonaws.com/prod/"
-  }
-}
+{}
