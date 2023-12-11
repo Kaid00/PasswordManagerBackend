@@ -1,5 +1,5 @@
 import { App } from "aws-cdk-lib";
-import { MonitorStack } from "../../src/infrastructure/stacks/monitorStack";
+import { MonitorStack } from "../src/infrastructure/stacks/monitorStack";
 import { Capture, Match, Template } from "aws-cdk-lib/assertions";
 
 

@@ -8,13 +8,9 @@ import { LambdaSubscription } from "aws-cdk-lib/aws-sns-subscriptions";
 import { Construct } from "constructs";
 import { join } from "path";
 
-interface MonitorStackProps extends StackProps {
-    stageName?: string
-}
-
 
 export class MonitorStack extends Stack {
-    constructor(scope: Construct, id: string, props?: MonitorStackProps) { 
+    constructor(scope: Construct, id: string, props?: StackProps) { 
         super(scope, id, props);
 
         const webHookLambda = new NodejsFunction(this, 'passwordManagerWebhookLambdaCi', {
@@ -24,15 +20,15 @@ export class MonitorStack extends Stack {
         })
 
         // Creating SNS TOPIC
-        const alarmTopic = new Topic(this, 'PasswordManagerAlarmTopicCi' + props.stageName, {
-            displayName: 'PasswordManagerAlarmTopicCi' + props.stageName,
-            topicName: 'PasswordManagerAlarmTopicCi' + props.stageName
+        const alarmTopic = new Topic(this, 'PasswordManagerAlarmTopicCi', {
+            displayName: 'PasswordManagerAlarmTopicCi',
+            topicName: 'PasswordManagerAlarmTopicCi'
         })
         // Subscribing toolsFinderWebhookLambda to the SNS Topic
         alarmTopic.addSubscription(new LambdaSubscription(webHookLambda));
 
         // CloudWatch Alarm for 4XX errors in the API Gateway
-        const toolsApi4xxAlarm = new Alarm(this, 'passwordManager4xxAlarmCi' + props.stageName, {
+        const toolsApi4xxAlarm = new Alarm(this, 'passwordManager4xxAlarmCi', {
             metric: new Metric({
                 metricName: '4XXError',
                 namespace: 'AWS/ApiGateway',
@@ -45,7 +41,7 @@ export class MonitorStack extends Stack {
             }),
             evaluationPeriods: 1,
             threshold: 5,
-            alarmName: 'passwordManager4xxAlarmCi' + props.stageName
+            alarmName: 'passwordManager4xxAlarmCi'
         });
         // Create SNS Action
         const topicAction = new SnsAction(alarmTopic);
