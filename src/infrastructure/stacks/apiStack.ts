@@ -15,42 +15,23 @@ export class ApiStack extends Stack {
     constructor(scope: Construct, id: string, props?: ApiStackProps) {
         super(scope, id, props);
 
-        const api = new RestApi(this, 'PasswordManagerApiCi' + props.stageName);
+        const api = new RestApi(this, 'PasswordManagerApiCi');
 
         // Configuring authorizer with Cognito User Pool
-        const authorizer = new CognitoUserPoolsAuthorizer(this, 'PasswordManagerApiAuthorizerCi' + props.stageName, {
+        const authorizer = new CognitoUserPoolsAuthorizer(this, 'PasswordManagerApiAuthorizerCi', {
             cognitoUserPools: [props.userPool],
             identitySource: 'method.request.header.Authorization'
         });
         authorizer._attachToApi(api);
         
         // Then create an explicit Deployment construct
-        const deployment  = new Deployment(this, 'passwordManagerDeploymentCi' + +props.stageName, { api });
+        const deployment  = new Deployment(this, 'passwordManagerDeploymentCi', { api });
 
        
         new Stage(this, props.stageName, {
             deployment,
             stageName: props.stageName
         })
-        // // And different stages
-        // const [devStage, testStage, prodStage] = ['dev', 'test', 'prod'].map(item => 
-        // new Stage(this, `${item}_stage`, { deployment, stageName: item }));
-        
-        // if( props.stageName === 'test') {
-        //     new Stage(this, 'test', {
-        //         deployment,
-        //         stageName: 'test'
-        //     })
-    
-        // } else if (props.stageName === 'prod') {
-        //     new Stage(this, 'prod', {
-        //         deployment,
-        //         stageName: 'prod'
-        //     })
-        // } 
-
-
-
 
         const optionsWithAuth: MethodOptions = {
             authorizationType: AuthorizationType.COGNITO,

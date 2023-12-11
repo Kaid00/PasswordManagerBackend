@@ -1,5 +1,5 @@
 import { Construct } from 'constructs';
-import { CfnOutput, Stack, StackProps } from 'aws-cdk-lib';
+import { Stack, StackProps } from 'aws-cdk-lib';
 import { AttributeType, ITable, Table } from 'aws-cdk-lib/aws-dynamodb';
 import { getSuffixFromStack } from '../../services/shared/utils';
 
