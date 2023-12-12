@@ -1,14 +1,12 @@
 name: SonarCloud analysis
 
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
   workflow_dispatch:
-
-permissions:
-  pull-requests: [opened, synchronize, reopened] 
+  push:
+    branches: 
+      - master
+  pull-requests:
+    types: [opened, synchronize, reopened] 
 jobs:
   sonarcloud:
     name: SonarCloud
