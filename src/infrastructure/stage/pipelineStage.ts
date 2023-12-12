@@ -4,6 +4,7 @@ import { DataStack } from "../stacks/dataStack";
 import { LambdaStack } from "../stacks/lambdaStack";
 import { AuthStack } from "../stacks/authStack";
 import { ApiStack } from "../stacks/apiStack";
+import { TESTApiStack } from "../stacks/testApiStack";
 // import { MonitorStack } from "../stacks/monitorStack";
 
 
@@ -21,11 +22,15 @@ export class PipelineStage extends Stage {
         
         const authStack = new AuthStack(this, 'PasswordManagerAuthStack')
         
-        new ApiStack(this, 'PasswordManagerApiStack1' + this.stageName, {
-            passwordLambdaIntegration: lambdaStack.passwordLambdaIntegration,
-            userPool: authStack.userPool,
-            stageName: props.stageName
-        })
+        // new ApiStack(this, 'PasswordManagerApiStack1' + this.stageName, {
+        //     passwordLambdaIntegration: lambdaStack.passwordLambdaIntegration,
+        //     userPool: authStack.userPool,
+        //     stageName: props.stageName
+        // })
+
+        const apiStack = new TESTApiStack(this, 'TESTAPISTACK')
+
+
 
         // new MonitorStack(this, 'PasswordManagerMonitorStackCi', {
         //     stageName: props.stageName

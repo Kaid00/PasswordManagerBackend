@@ -31,9 +31,9 @@ export class CiCdStack extends cdk.Stack {
     
     testingStage.addPost(new ManualApprovalStep('Manual approval before production'))
 
-    // const productionStage = pipeline.addStage(new PipelineStage(this, 'PipelineProductionStage', {
-    //     stageName: 'prod'
-    //   }));
+    const productionStage = pipeline.addStage(new PipelineStage(this, 'PipelineProductionStage', {
+        stageName: 'prod'
+      }));
 
  
 
