@@ -4,7 +4,10 @@ import { CfnIdentityPool, CfnIdentityPoolRoleAttachment, CfnUserPoolGroup, UserP
 import { FederatedPrincipal, Role } from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 
+interface AuthStackProps extends StackProps {
+    stageName?: string
 
+}
 
 export class AuthStack extends Stack {
   
@@ -16,24 +19,24 @@ export class AuthStack extends Stack {
     private adminRole: Role;
     
 
-    constructor(scope: Construct, id: string, props?: StackProps) {
+    constructor(scope: Construct, id: string, props?: AuthStackProps) {
         super(scope, id, props)
 
         // Cognito components
-        this.createUserPool();
-        this.createUserPoolClient();
-        this.createIdentityPoop();
+        this.createUserPool(props.stageName);
+        this.createUserPoolClient(props.stageName);
+        this.createIdentityPool(props.stageName);
 
 
         this.createRoles();
         this.attachRoles();
-        this.createAdminsGroup();
+        this.createAdminsGroup(props.stageName);
 
     }
 
     // Creating UserPool
-    private createUserPool(){
-        this.userPool = new UserPool(this, 'PasswordManagerUserPool', {
+    private createUserPool(stageName: string){
+        this.userPool = new UserPool(this, 'PasswordManagerUserPool_' +  stageName.toUpperCase(), {
             selfSignUpEnabled: true,
             signInAliases: {
                 username: true,
@@ -48,8 +51,8 @@ export class AuthStack extends Stack {
     }
 
     // Creating UserPool Client
-    private createUserPoolClient(){
-        this.userPoolClient = this.userPool.addClient('PasswordManagerUserPoolClient'), {
+    private createUserPoolClient(stageName: string){
+        this.userPoolClient = this.userPool.addClient('PasswordManagerUserPoolClient_' + stageName.toUpperCase()) , {
             authFlows: {
                 adminUserPassword: true,
                 custom: true,
@@ -64,9 +67,9 @@ export class AuthStack extends Stack {
         })
     }
 
-    private createAdminsGroup(){
+    private createAdminsGroup(stageName: string){
 
-        new CfnUserPoolGroup(this, 'PasswordManagerAdmins', {
+        new CfnUserPoolGroup(this, 'PasswordManagerAdmins_' + stageName.toUpperCase(), {
             userPoolId: this.userPool.userPoolId,
             groupName: 'admins',
             roleArn: this.adminRole.roleArn
@@ -75,8 +78,8 @@ export class AuthStack extends Stack {
       
     }
 
-    private createIdentityPoop() {
-        this.identityPool = new CfnIdentityPool(this, 'PasswordManagerIdentityPool', {
+    private createIdentityPool(stageName: string) {
+        this.identityPool = new CfnIdentityPool(this, 'PasswordManagerIdentityPool_' + stageName.toUpperCase(), {
             allowUnauthenticatedIdentities: true,
             cognitoIdentityProviders: [{
                 clientId: this.userPoolClient.userPoolClientId,
