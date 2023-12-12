@@ -23,7 +23,7 @@ export class CiCdStack extends cdk.Stack {
     }));
 
     testingStage.addPre(new CodeBuildStep('Synth', {
-        commands: ['./build.sh'],
+        commands: ['./buildspec.yaml'],
     }));
 
  
