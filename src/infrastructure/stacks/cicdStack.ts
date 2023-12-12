@@ -22,9 +22,9 @@ export class CiCdStack extends cdk.Stack {
       stageName: 'test'
     }));
 
-    testingStage.addPre(new CodeBuildStep('Synth', {
-        commands: ['./buildspec.yaml'],
-    }));
+    // testingStage.addPre(new CodeBuildStep('Synth', {
+    //     commands: ['./buildspec.yaml'],
+    // }));
 
  
 
