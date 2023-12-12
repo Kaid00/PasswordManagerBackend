@@ -14,6 +14,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/aws-lambda": "^8.10.114",
+    "@types/jest": "^29.5.11",
     "@types/node": "^18.15.10",
     "aws-cdk": "2.79.1",
     "aws-cdk-lib": "2.79.1",
@@ -32,7 +33,6 @@
     "@aws-sdk/credential-providers": "^3.310.0",
     "@aws-sdk/lib-dynamodb": "^3.306.0",
     "@aws-sdk/util-dynamodb": "^3.306.0",
-    "@types/jest": "^29.5.1",
     "aws-amplify": "^5.0.25"
   }
 }
