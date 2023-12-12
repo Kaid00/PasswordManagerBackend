@@ -6,8 +6,8 @@ import { AuthService } from "./authService";
 async function testAuth() {
     const service  = new AuthService();
     const loginResult = await service.login(
-        'junior',
-        'Juni0r-r'
+        'jay',
+        'Kaid0-00'
     )
     console.log(loginResult.getSignInUserSession().getIdToken().getJwtToken());
     // const credentials = await service.generateTemporaryCredentials(loginResult);
