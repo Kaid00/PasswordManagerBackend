@@ -5,7 +5,7 @@ on:
   push:
     branches: 
       - master
-  pull-requests:
+  pull-request:
     types: [opened, synchronize, reopened] 
 jobs:
   sonarcloud:
