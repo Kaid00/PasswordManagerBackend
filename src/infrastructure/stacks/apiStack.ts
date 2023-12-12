@@ -24,14 +24,14 @@ export class ApiStack extends Stack {
         });
         authorizer._attachToApi(api);
         
-        // Then create an explicit Deployment construct
-        const deployment  = new Deployment(this, 'passwordManagerDeploymentCi', { api });
+        // // Then create an explicit Deployment construct
+        // const deployment  = new Deployment(this, 'passwordManagerDeploymentCi', { api });
 
        
-        new Stage(this, props.stageName, {
-            deployment,
-            stageName: props.stageName
-        })
+        // new Stage(this, props.stageName, {
+        //     deployment,
+        //     stageName: props.stageName
+        // })
 
         const optionsWithAuth: MethodOptions = {
             authorizationType: AuthorizationType.COGNITO,
