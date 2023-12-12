@@ -22,18 +22,10 @@ export class CiCdStack extends cdk.Stack {
       stageName: 'test'
     }));
 
-    testingStage.addPre(new CodeBuildStep('Sonar step', {
-      commands: [
-      ], 
-      
-      env: {
-        LOGIN: 'prod/sonar:sonartoken',
-        HOST: 'prod/sonar:HOST',
-        Organization: 'prod/sonar:Organization',
-        Project: 'prod/sonar:Project'
-      },
-    
+    testingStage.addPre(new CodeBuildStep('Synth', {
+        commands: ['./build.sh'],
     }));
+
  
 
     testingStage.addPost(new ManualApprovalStep('Manual approval before production'))
