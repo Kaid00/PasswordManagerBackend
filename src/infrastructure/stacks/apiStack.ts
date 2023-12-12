@@ -15,7 +15,7 @@ export class ApiStack extends Stack {
     constructor(scope: Construct, id: string, props?: ApiStackProps) {
         super(scope, id, props);
 
-        const api = new RestApi(this, 'PasswordManagerApiCi');
+        const api = new RestApi(this, 'PasswordManagerApiCi' + props.stageName.toUpperCase());
 
         // Configuring authorizer with Cognito User Pool
         const authorizer = new CognitoUserPoolsAuthorizer(this, 'PasswordManagerApiAuthorizerCi', {
@@ -23,15 +23,6 @@ export class ApiStack extends Stack {
             identitySource: 'method.request.header.Authorization'
         });
         authorizer._attachToApi(api);
-        
-        // // Then create an explicit Deployment construct
-        // const deployment  = new Deployment(this, 'passwordManagerDeploymentCi', { api });
-
-       
-        // new Stage(this, props.stageName, {
-        //     deployment,
-        //     stageName: props.stageName
-        // })
 
         const optionsWithAuth: MethodOptions = {
             authorizationType: AuthorizationType.COGNITO,
