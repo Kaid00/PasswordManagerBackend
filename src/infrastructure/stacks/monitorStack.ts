@@ -8,9 +8,13 @@ import { LambdaSubscription } from "aws-cdk-lib/aws-sns-subscriptions";
 import { Construct } from "constructs";
 import { join } from "path";
 
+interface MonitorStackProps extends StackProps {
 
+    stageName?: string
+
+}
 export class MonitorStack extends Stack {
-    constructor(scope: Construct, id: string, props?: StackProps) { 
+    constructor(scope: Construct, id: string, props?: MonitorStackProps) { 
         super(scope, id, props);
 
         const webHookLambda = new NodejsFunction(this, 'passwordManagerWebhookLambdaCi', {
@@ -20,9 +24,9 @@ export class MonitorStack extends Stack {
         })
 
         // Creating SNS TOPIC
-        const alarmTopic = new Topic(this, 'PasswordManagerAlarmTopicCi', {
-            displayName: 'PasswordManagerAlarmTopicCi',
-            topicName: 'PasswordManagerAlarmTopicCi'
+        const alarmTopic = new Topic(this, 'PasswordManagerAlarmTopicCi' + props.stageName.toUpperCase(), {
+            displayName: 'PasswordManagerAlarmTopicCi' + props.stageName.toUpperCase(),
+            topicName: 'PasswordManagerAlarmTopicCi' + props.stageName.toUpperCase()
         })
         // Subscribing toolsFinderWebhookLambda to the SNS Topic
         alarmTopic.addSubscription(new LambdaSubscription(webHookLambda));

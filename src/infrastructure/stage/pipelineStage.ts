@@ -32,6 +32,7 @@ export class PipelineStage extends Stage {
 
 
         new MonitorStack(this, 'PasswordManagerMonitorStackCi', {
+            stageName: props.stageName
         });
 
 
