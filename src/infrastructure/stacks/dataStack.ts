@@ -22,7 +22,7 @@ export class DataStack extends Stack {
                 type: AttributeType.STRING
             },
 
-            tableName: `PasswordsTable-${suffix}`
+            tableName: `PasswordsTable_` + props.stageName.toUpperCase() + `-${suffix}` 
         })
     }
 }

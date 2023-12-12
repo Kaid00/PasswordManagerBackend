@@ -20,7 +20,7 @@ export class LambdaStack extends Stack {
         super(scope, id, props);
 
 
-        const passwordsLambda = new NodejsFunction(this, 'PasswordsLambda', {
+        const passwordsLambda = new NodejsFunction(this, 'PasswordsLambda_' + props.stageName.toUpperCase(), {
             runtime: Runtime.NODEJS_18_X,
             handler: 'passwordHandler',
             entry: (join(__dirname, '..', '..' ,'services', 'passwordsHandlers','passwordHandler.ts')),
