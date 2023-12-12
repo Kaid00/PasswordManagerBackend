@@ -6,7 +6,7 @@
   "scripts": {
     "test-services": "jest --config jest.services.config.ts",
     "test-infrastructure": "jest --config jest.infrastructure.config.ts",
-    "test": "npm run test-services && npm run test-infrastructure",
+    "test": "npm run test-services",
     "deploy": "cdk deploy --all --outputs-file outputs.json"
   },
   "keywords": [],
